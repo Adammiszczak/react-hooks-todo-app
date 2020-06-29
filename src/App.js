@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import ListTodo from './ListTodo/ListTodo';
+import FormTodo from './FormTodo/FormTodo';
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,23 +28,34 @@ function MainNav() {
 }
 
 function Home() {
+
+  const [todos, setTodos] = useState([]);
+
   return (
-        <Container fluid={true} className="d-flex vh-100 align-items-center justify-content-center">
-        <Row lg={12}  className="text-center">
-          <Col className="text-center">
+    <Container fluid={true} className="d-flex flex-column vh-100 align-items-center justify-content-center">
+      <Row className="text-center my-5">
+        <Col className="text-center">
           <h1>React ToDo App with hooks</h1>
-          </Col>
-        </Row>
-      </Container>
+          <FormTodo saveTodo={(todoText) => {
+            const trimmedText = todoText.trim();
+
+            if (trimmedText.length > 0) {
+              setTodos([...todos, trimmedText]);
+            }
+          }} />
+          <ListTodo todos={todos} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
 function About() {
   return (
     <Container fluid={true} className="d-flex vh-100 align-items-center justify-content-center">
-      <Row lg={12}  className="text-center">
+      <Row lg={12} className="text-center">
         <Col className="text-center">
-        <h1>About Page</h1>
+          <h1>About Page</h1>
         </Col>
       </Row>
     </Container>
@@ -50,6 +63,7 @@ function About() {
 };
 
 function App() {
+
   return (
     <div className="App">
       <Router basename="/react-hooks-todo-app/">
