@@ -11,6 +11,7 @@ function FormTodo({ saveTodo }) {
             onSubmit={(event) => {
                 event.preventDefault();
                 saveTodo(value);
+                setTodo('');
             }}>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Single ToDo Name</Form.Label>

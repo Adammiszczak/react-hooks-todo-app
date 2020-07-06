@@ -43,7 +43,13 @@ function Home() {
               setTodos([...todos, trimmedText]);
             }
           }} />
-          <ListTodo todos={todos} />
+          <ListTodo 
+          todos={todos}
+          deleteTodo={(todoIndex) => {
+            const newTodos = todos.filter((el,index) => index !== todoIndex);
+            setTodos(newTodos);
+          }}
+          />
         </Col>
       </Row>
     </Container>
