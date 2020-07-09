@@ -45,6 +45,13 @@ function Home() {
           }} />
           <ListTodo 
           todos={todos}
+          editTodo={(todoIndex,editedValue) => {
+            console.log(todoIndex);
+            let editedTodos = [...todos];
+            editedTodos[todoIndex] = editedValue;
+            console.log(editedValue);
+            setTodos(editedTodos);
+          }}
           deleteTodo={(todoIndex) => {
             const newTodos = todos.filter((el,index) => index !== todoIndex);
             setTodos(newTodos);
